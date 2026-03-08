@@ -1,0 +1,158 @@
+ Image nsolid_docker_image-analyzer Building 
+ Image nsolid_docker_image-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.17kB done
+#1 DONE 0.0s
+
+#2 [app internal] load build definition from Dockerfile
+#2 transferring dockerfile: 365B done
+#2 DONE 0.0s
+
+#3 [analyzer internal] load build definition from Dockerfile
+#3 transferring dockerfile: 399B done
+#3 DONE 0.0s
+
+#4 [app internal] load metadata for docker.io/nodesource/nsolid:latest
+#4 DONE 0.0s
+
+#5 [app internal] load .dockerignore
+#5 transferring context: 2B done
+#5 DONE 0.0s
+
+#6 [app internal] load build context
+#6 transferring context: 1.08kB done
+#6 DONE 0.0s
+
+#7 [app 1/4] FROM docker.io/nodesource/nsolid:latest@sha256:be0570947abfaca7bd8637104f20ce6d412cb88dded1cabe2aa73dfabbf941e0
+#7 resolve docker.io/nodesource/nsolid:latest@sha256:be0570947abfaca7bd8637104f20ce6d412cb88dded1cabe2aa73dfabbf941e0 done
+#7 DONE 0.1s
+
+#8 [analyzer internal] load metadata for docker.io/library/node:22-bookworm-slim
+#8 ...
+
+#9 [app 2/4] WORKDIR /opt/sandbox/app
+#9 DONE 0.2s
+
+#10 [app 3/4] COPY start.sh /usr/local/bin/start-untrusted.sh
+#10 DONE 0.0s
+
+#11 [app 4/4] RUN chmod +x /usr/local/bin/start-untrusted.sh
+#11 DONE 0.1s
+
+#8 [analyzer internal] load metadata for docker.io/library/node:22-bookworm-slim
+#8 DONE 0.7s
+
+#12 [app] exporting to image
+#12 exporting layers 0.1s done
+#12 exporting manifest sha256:a017e3381918bb2937595f0fdb974a6e34589f332560550a0fc932f105528b39 done
+#12 exporting config sha256:6d07d6b8d3e7c4f367c71ec80fc49c9bdbca8e6384036a5a390dbb64918b0569 done
+#12 exporting attestation manifest sha256:441f4fdee6bc123a078c4747c7e5c7362561a45ea3576b62e9c8ecb35287c1e6 0.0s done
+#12 exporting manifest list sha256:05ace94a1e20c33ec6ca1a676aeb07e8524cff006d698de79247a2fe6f0cf5a5 done
+#12 naming to docker.io/library/nsolid_docker_image-app:latest done
+#12 unpacking to docker.io/library/nsolid_docker_image-app:latest 0.0s done
+#12 DONE 0.2s
+
+#13 [analyzer internal] load .dockerignore
+#13 transferring context: 2B done
+#13 DONE 0.1s
+
+#14 [analyzer internal] load build context
+#14 transferring context: 20.12kB done
+#14 DONE 0.0s
+
+#15 [app] resolving provenance for metadata file
+#15 DONE 0.0s
+
+#16 [analyzer 1/8] FROM docker.io/library/node:22-bookworm-slim@sha256:dd9d21971ec4395903fa6143c2b9267d048ae01ca6d3ea96f16cb30df6187d94
+#16 resolve docker.io/library/node:22-bookworm-slim@sha256:dd9d21971ec4395903fa6143c2b9267d048ae01ca6d3ea96f16cb30df6187d94 0.0s done
+#16 sha256:c5491356fc5efa6354743577e97da5670d969ce1e1676f1489484e2e57fcad28 448B / 448B 0.1s done
+#16 sha256:24c00b700caca8ca4802abc3e1fc2ba1083f26bf28721b36aa8442c7fc68f7d5 3.31kB / 3.31kB 0.1s done
+#16 extracting sha256:24c00b700caca8ca4802abc3e1fc2ba1083f26bf28721b36aa8442c7fc68f7d5 0.0s done
+#16 sha256:65614da1506aaac2ab7e3f898c006e029e2e84d1e9e265aa8a8691999c811abd 1.71MB / 1.71MB 0.2s done
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 0B / 49.61MB 0.2s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 10.49MB / 49.61MB 0.5s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 15.73MB / 49.61MB 0.6s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 22.02MB / 49.61MB 0.8s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 27.26MB / 49.61MB 0.9s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 34.60MB / 49.61MB 1.1s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 40.89MB / 49.61MB 1.2s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 48.23MB / 49.61MB 1.4s
+#16 sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 49.61MB / 49.61MB 1.5s done
+#16 extracting sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a
+#16 extracting sha256:e0efe4312ea5f2c4a62515aaae9d4b5e534498ac14d69896dce3becdbe7aa71a 0.7s done
+#16 DONE 2.2s
+
+#16 [analyzer 1/8] FROM docker.io/library/node:22-bookworm-slim@sha256:dd9d21971ec4395903fa6143c2b9267d048ae01ca6d3ea96f16cb30df6187d94
+#16 extracting sha256:65614da1506aaac2ab7e3f898c006e029e2e84d1e9e265aa8a8691999c811abd 0.0s done
+#16 extracting sha256:c5491356fc5efa6354743577e97da5670d969ce1e1676f1489484e2e57fcad28 done
+#16 DONE 2.3s
+
+#17 [analyzer 2/8] WORKDIR /app
+#17 DONE 0.2s
+
+#18 [analyzer 3/8] COPY package.json ./
+#18 DONE 0.0s
+
+#19 [analyzer 4/8] RUN npm install --omit=dev
+#19 3.707 
+#19 3.707 added 135 packages, and audited 136 packages in 4s
+#19 3.707 
+#19 3.707 32 packages are looking for funding
+#19 3.707   run `npm fund` for details
+#19 3.708 
+#19 3.708 found 0 vulnerabilities
+#19 3.709 npm notice
+#19 3.709 npm notice New major version of npm available! 10.9.4 -> 11.11.0
+#19 3.709 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.11.0
+#19 3.709 npm notice To update run: npm install -g npm@11.11.0
+#19 3.709 npm notice
+#19 DONE 3.9s
+
+#20 [analyzer 5/8] COPY src ./src
+#20 DONE 0.1s
+
+#21 [analyzer 6/8] COPY public ./public
+#21 DONE 0.0s
+
+#22 [analyzer 7/8] COPY config ./config
+#22 DONE 0.0s
+
+#23 [analyzer 8/8] RUN mkdir -p /app/data
+#23 DONE 0.1s
+
+#24 [analyzer] exporting to image
+#24 exporting layers
+#24 exporting layers 0.9s done
+#24 exporting manifest sha256:4ed8484fa9b4da93c68cf4a3e2d7ff65cb85bc66e7baed2acb464da724118074 done
+#24 exporting config sha256:9cb4723d8a571e2b61f520a3a94fcde534d6816f3d3788841602d54db68d4417 done
+#24 exporting attestation manifest sha256:293f378fa50903f80f733f451da4bdad67f7e7fa240ee6698656948b0f35b2af 0.0s done
+#24 exporting manifest list sha256:44dfae5859754295c90621a342fa2c43c81fd2e58f638bffbbf08b0101853e2e done
+#24 naming to docker.io/library/nsolid_docker_image-analyzer:latest done
+#24 unpacking to docker.io/library/nsolid_docker_image-analyzer:latest
+#24 unpacking to docker.io/library/nsolid_docker_image-analyzer:latest 0.4s done
+#24 DONE 1.4s
+
+#25 [analyzer] resolving provenance for metadata file
+#25 DONE 0.0s
+ Image nsolid_docker_image-app Built 
+ Image nsolid_docker_image-analyzer Built 
+ Network nsolid-sandbox-net Creating 
+ Network nsolid-sandbox-net Created 
+ Volume nsolid_docker_image_app-artifacts Creating 
+ Volume nsolid_docker_image_app-artifacts Created 
+ Volume nsolid_docker_image_prometheus-data Creating 
+ Volume nsolid_docker_image_prometheus-data Created 
+ Container nsolid-sandbox-jaeger Creating 
+ Container nsolid-sandbox-jaeger Created 
+ Container nsolid-sandbox-otel Creating 
+ Container nsolid-sandbox-otel Created 
+ Container nsolid-sandbox-prometheus Creating 
+ Container nsolid-sandbox-app Creating 
+ Container nsolid-sandbox-prometheus Created 
+ Container nsolid-sandbox-app Created 
+ Container nsolid-sandbox-analyzer Creating 
+ Container nsolid-sandbox-analyzer Created 
+ Container nsolid-sandbox-jaeger Starting 
+ Container nsolid-sandbox-jaeger Started 
+ Container nsolid-sandbox-otel Starting 
+Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint nsolid-sandbox-otel (d1afdee6484dfdeac8a62b1764fa27f0367d48ea276daebdc3f0335599747405): Bind for 0.0.0.0:4317 failed: port is already allocated

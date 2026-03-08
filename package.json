@@ -1,0 +1,12 @@
+{
+  "name": "nsolid-runtime-server",
+  "version": "1.0.0",
+  "description": "N|Solid Runtime API Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["nsolid", "runtime", "api"],
+  "author": "",
+  "license": "ISC"
+}

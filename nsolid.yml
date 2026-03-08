@@ -1,0 +1,6 @@
+version: "1"
+command:
+  host: "nsolid-console"
+  port: 9001
+data:
+  path: /data/nsolid

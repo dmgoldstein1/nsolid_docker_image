@@ -1,0 +1,7 @@
+ Image prom/prometheus:v2.55.1 Pulling 
+ Image otel/opentelemetry-collector-contrib:0.146.0 Pulling 
+ Image jaegertracing/all-in-one:1.64 Pulling 
+ Image jaegertracing/all-in-one:1.64 Error failed to resolve reference "docker.io/jaegertracing/all-in-one:1.64": docker.io/jaegertracing/all-in-one:1.64: not found
+ Image otel/opentelemetry-collector-contrib:0.146.0 Interrupted 
+ Image prom/prometheus:v2.55.1 Interrupted 
+Error response from daemon: failed to resolve reference "docker.io/jaegertracing/all-in-one:1.64": docker.io/jaegertracing/all-in-one:1.64: not found

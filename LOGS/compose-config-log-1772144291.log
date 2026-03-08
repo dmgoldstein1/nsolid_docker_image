@@ -1,0 +1,171 @@
+name: nsolid_docker_image
+services:
+  analyzer:
+    build:
+      context: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/analyzer
+      dockerfile: Dockerfile
+    container_name: nsolid-sandbox-analyzer
+    depends_on:
+      app:
+        condition: service_started
+        required: true
+      jaeger:
+        condition: service_started
+        required: true
+      prometheus:
+        condition: service_started
+        required: true
+    environment:
+      ALERTS_FILE: /app/data/alerts.json
+      AUTO_PAUSE_ON_ALERT: "true"
+      CPU_ALERT_CONSECUTIVE_POLLS: "3"
+      CPU_ALERT_THRESHOLD: "80"
+      HIGH_NET_TX_BYTES_PER_SEC: "250000"
+      JAEGER_URL: http://jaeger:16686
+      POLL_INTERVAL_MS: "5000"
+      PORT: "8080"
+      PROMETHEUS_URL: http://prometheus:9090
+      RULES_FILE: /app/config/rules.json
+      TARGET_CONTAINER: nsolid-sandbox-app
+    networks:
+      sandbox: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind: {}
+      - type: bind
+        source: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/analyzer/config
+        target: /app/config
+        bind: {}
+      - type: bind
+        source: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/analyzer/data
+        target: /app/data
+        bind: {}
+  app:
+    build:
+      context: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/app
+      dockerfile: Dockerfile
+    cap_drop:
+      - ALL
+    container_name: nsolid-sandbox-app
+    depends_on:
+      otel-collector:
+        condition: service_started
+        required: true
+    environment:
+      NSOLID_APP: nsolid-sandbox-app
+      NSOLID_BLOCKED_LOOP_THRESHOLD: "250"
+      NSOLID_OTLP: otlp
+      NSOLID_TRACING_ENABLED: "true"
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+      OTEL_SERVICE_NAME: nsolid-sandbox-app
+      SANDBOX_ALLOW_FS_READ: /opt/sandbox/app
+      SANDBOX_ALLOW_FS_WRITE: /tmp
+      SANDBOX_SCRIPT: /opt/sandbox/app/untrusted.js
+    networks:
+      sandbox: null
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=64m
+      - /run:size=16m
+    volumes:
+      - type: bind
+        source: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/app
+        target: /opt/sandbox/app
+        read_only: true
+        bind: {}
+      - type: volume
+        source: app-artifacts
+        target: /opt/sandbox/artifacts
+        volume: {}
+  jaeger:
+    container_name: nsolid-sandbox-jaeger
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    image: jaegertracing/all-in-one:1.64
+    networks:
+      sandbox: null
+    ports:
+      - mode: ingress
+        target: 16686
+        published: "16686"
+        protocol: tcp
+      - mode: ingress
+        target: 4317
+        published: "4319"
+        protocol: tcp
+  otel-collector:
+    command:
+      - --config=/etc/otelcol-contrib/config.yaml
+    container_name: nsolid-sandbox-otel
+    depends_on:
+      jaeger:
+        condition: service_started
+        required: true
+    image: otel/opentelemetry-collector-contrib:0.146.0
+    networks:
+      sandbox: null
+    ports:
+      - mode: ingress
+        target: 4317
+        published: "4317"
+        protocol: tcp
+      - mode: ingress
+        target: 4318
+        published: "4318"
+        protocol: tcp
+      - mode: ingress
+        target: 8889
+        published: "8889"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/otel/config.yaml
+        target: /etc/otelcol-contrib/config.yaml
+        read_only: true
+        bind: {}
+  prometheus:
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+    container_name: nsolid-sandbox-prometheus
+    depends_on:
+      otel-collector:
+        condition: service_started
+        required: true
+    image: prom/prometheus:v2.55.1
+    networks:
+      sandbox: null
+    ports:
+      - mode: ingress
+        target: 9090
+        published: "9090"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /Users/danielgoldstein/Documents/VibeCoding/nsolid_docker_image/sandbox/prometheus/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+        bind: {}
+      - type: volume
+        source: prometheus-data
+        target: /prometheus
+        volume: {}
+networks:
+  sandbox:
+    name: nsolid-sandbox-net
+volumes:
+  app-artifacts:
+    name: nsolid_docker_image_app-artifacts
+  prometheus-data:
+    name: nsolid_docker_image_prometheus-data
