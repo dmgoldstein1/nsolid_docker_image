@@ -79,7 +79,7 @@ services:
     build:
       context: ./sandbox/analyzer
       args:
-        SOCKET_API_KEY: ""
+        SOCKET_API_KEY: ${SOCKET_API_KEY}
     container_name: nsolid-sandbox-analyzer
     environment:
       PORT: "8080"
