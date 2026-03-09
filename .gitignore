@@ -30,3 +30,6 @@ tmp/
 usr/
 var/
 sandbox/
+
+# ignore git directory backups
+.git.backup/
